@@ -12,17 +12,31 @@ P.add_argument('-c', type=str)
 
 args = P.parse_args()
 
+def Rotate(src, degrees) :
+    if degrees == 90 :
+        dst = cv2.transpose(src)
+        dst = cv2.flip(dst, 1)
+    elif degrees == 180 :
+        dst = cv2.flip(src, 0)
+    elif degrees == 270 :
+        dst = cv2.transpose(src)
+        dst = cv2.flip(dst, 0)
+    else :
+        dst = null
+    return dst
+
+
+
 if args.c is None:
     print("사용법 : python changer.py -c <카메라 번호>")
 
 else:
 
-	iport = args.c
+    iport = args.c
+    cap = cv2.VideoCapture("http://test@192.168.0." + iport + ":8090/?action=stream")
 
-	cap = cv2.VideoCapture("http://test@192.168.0." + iport + ":8090/?action=stream")
-
-	if cap.isOpened() :
-		print('width : {}, height : {}'.format(cap.get(3), cap.get(4)))
+    if cap.isOpened() :
+        print('width : {}, height : {}'.format(cap.get(3), cap.get(4)))
 
 	cv2.namedWindow('{} Camera'.format(iport), cv2.WINDOW_NORMAL)
 	cv2.resizeWindow('{} Camera'.format(iport), 720, 1280)
@@ -30,27 +44,7 @@ else:
 	bightness = cap.set(cv2.CAP_PROP_BRIGHTNESS, 100)
 	print cap.get(cv2.CAP_PROP_BRIGHTNESS)
 
-	#change to fps
-	#raw = cv2.cv.CV_FOURCC(*'MJPG')
-	#out= cv2.VideoWriter('./Nobrand_Hand_man.avi', raw, 30.0, (1280, 720))
-
-	def Rotate(src, degrees) :
-		if degrees == 90 :
-			dst = cv2.transpose(src)
-			dst = cv2.flip(dst, 1)
-
-		elif degrees == 180 :
-			dst = cv2.flip(src, 0)
-
-		elif degrees == 270 :
-			dst = cv2.transpose(src)
-			dst = cv2.flip(dst, 0)
-
-		else :
-			dst = null
-
-		return dst
-
+	
 	while True:
 		ret, frame = cap.read()
 
@@ -70,7 +64,7 @@ else:
 
 
 		if cv2.waitKey(1) & 0xFF == ord('s'):
-			for i in range(10):
+			for i in range(2):
 				cv2.imwrite('./saved_images/{}_camera({})_{}.jpg'.format(iport, datetime.today().strftime('%Y.%m.%d-%H:%M:%S'),i),frame)
 				print('./saved_images/{}_camera({})_{}.jpg saved'.format(iport, datetime.today().strftime('%Y.%m.%d-%H:%M:%S'),i))
 				time.sleep(2)
