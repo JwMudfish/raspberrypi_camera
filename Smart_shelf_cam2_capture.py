@@ -55,19 +55,21 @@ else:
 		frame = Rotate(frame, 90)
 		cv2.imshow('{} Camera'.format(iport), frame)
 		
-		if cv2.waitKey(1) & 0xFF == ord('q'):
-			break
+		ch = cv2.waitKey(1)
+		if ch == ord('q'):
+		    break
 
-		if cv2.waitKey(1) & 0xFF == ord('c'):
-			cv2.imwrite('./saved_images/{}_camera({}).jpg'.format(iport, datetime.today().strftime('%Y.%m.%d-%H:%M:%S')),frame)
-			print('./saved_images/{}_camera({}).jpg saved'.format(iport, datetime.today().strftime('%Y.%m.%d-%H:%M:%S')))
+		elif ch == ord('c'):
+		    print('press c')
+		    cv2.imwrite('./saved_images/{}_camera({}).jpg'.format(iport, datetime.today().strftime('%Y.%m.%d-%H:%M:%S')),frame)
+		    print('./saved_images/{}_camera({}).jpg saved'.format(iport, datetime.today().strftime('%Y.%m.%d-%H:%M:%S')))
 
 
-		if cv2.waitKey(1) & 0xFF == ord('s'):
+		elif ch == ord('s'):
 			for i in range(2):
-				cv2.imwrite('./saved_images/{}_camera({})_{}.jpg'.format(iport, datetime.today().strftime('%Y.%m.%d-%H:%M:%S'),i),frame)
-				print('./saved_images/{}_camera({})_{}.jpg saved'.format(iport, datetime.today().strftime('%Y.%m.%d-%H:%M:%S'),i))
-				time.sleep(2)
+			    cv2.imwrite('./saved_images/{}_camera({})_{}.jpg'.format(iport, datetime.today().strftime('%Y.%m.%d-%H:%M:%S'),i),frame)
+			    print('./saved_images/{}_camera({})_{}.jpg saved'.format(iport, datetime.today().strftime('%Y.%m.%d-%H:%M:%S'),i))
+			    time.sleep(1)
 
 
 
