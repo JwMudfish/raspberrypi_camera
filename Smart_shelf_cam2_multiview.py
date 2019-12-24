@@ -7,7 +7,7 @@ import time
 cap1 = cv2.VideoCapture("http://test@192.168.0.240:8090/?action=stream")
 cap2 = cv2.VideoCapture("http://test@192.168.0.242:8090/?action=stream")
 cap3 = cv2.VideoCapture("http://test@192.168.0.243:8090/?action=stream")
-cap4 = cv2.VideoCapture("http://test@192.168.0.243:8090/?action=stream")
+cap4 = cv2.VideoCapture("http://test@192.168.0.244:8090/?action=stream")
 cap5 = cv2.VideoCapture("http://test@192.168.0.245:8090/?action=stream")
 cap6 = cv2.VideoCapture("http://test@192.168.0.246:8090/?action=stream")
 
@@ -43,7 +43,7 @@ white = (255, 255, 255)
 
 thickness = 2 
 
-location = (200, 80)
+location = (200, 40)
 #font = cv2.FONT_ITALIC  # italic font
 #font = cv2.FONT_HERSHEY_SIMPLEX # normal size sans-serif font
 font = cv2.FONT_ITALIC  # italic font
@@ -95,8 +95,8 @@ while True:
     frame1 = cv2.putText(frame1, '240', location, font, fontScale, white, thickness)
     frame2 = cv2.putText(frame2, '241', location, font, fontScale, white, thickness)
     frame3 = cv2.putText(frame3, '243', location, font, fontScale, white, thickness)
-    frame4 = cv2.putText(frame4, '243', location, font, fontScale, red, thickness)
-    frame5 = cv2.putText(frame5, '245', location, font, fontScale, red, thickness)
+    frame4 = cv2.putText(frame4, '244', location, font, fontScale, white, thickness)
+    frame5 = cv2.putText(frame5, '245', location, font, fontScale, white, thickness)
     frame6 = cv2.putText(frame6, '246', location, font, fontScale, red, thickness)
 
     height = frame1.shape[0]
