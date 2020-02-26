@@ -37,40 +37,47 @@ MJPG_CODEC = 1196444237.0 # MJPG
 cv2.namedWindow('Usb Cam', cv2.WINDOW_NORMAL)
 cv2.resizeWindow('Usb Cam', frame_width,frame_height)
 
-bightness = cap.set(cv2.CAP_PROP_BRIGHTNESS, 150)
+cap.set(cv2.CAP_PROP_BRIGHTNESS, 10)
 cap.set(cv2.CAP_PROP_FOURCC, MJPG_CODEC)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 3840)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 2160)
+cap.set(cv2.CAP_PROP_AUTOFOCUS, 0)
+#cap.set(cv2.CAP_PROP_FOCUS, 28)
+
+
+
 #print cap.get(cv2.CAP_PROP_BRIGHTNESS)
-print cap.get(cv2.CAP_PROP_FOURCC)
+#print cap.get(cv2.CAP_PROP_FOURCC)
 
 
 while True:
-	ret, frame = cap.read()
+    ret, frame = cap.read()
 
 	#change to frame size 
-        #frame = cv2.resize(frame, (frame_width, frame_height))
+    #frame = cv2.resize(frame, (frame_width, frame_height))
 	# rotate_frame = imutils.rotate(frame, 0) 
 	#frame = Rotate(frame, 90)
-	cv2.imshow('Usb Cam', frame)
-        #out.write(frame)	
-        today = datetime.today().strftime('%Y-%m-%d-%H:%M:%S')
+    cv2.imshow('Usb Cam', frame)
+    #print(ret)
+    #out.write(frame)
+    today = datetime.today().strftime('%Y-%m-%d-%H:%M:%S')
 
-	ch = cv2.waitKey(1)
-	if ch == ord('q'):
+
+    ch = cv2.waitKey(1)
+    if ch == ord('q'):
 	    break
 
-	elif ch == ord('c'):
+    elif ch == ord('c'):
 	    print('press c')
 	    cv2.imwrite('./saved_images/usbcam({}).jpg'.format(today),frame)
 	    print('./saved_images/usbcam({}).jpg saved'.format(today))
 
 
-	elif ch == ord('s'):
-		for i in range(2):
-		    cv2.imwrite('./saved_images/usbcam({})_{}.jpg'.format(today,i),frame)
-		    print('./saved_images/usbcam({})_{}.jpg saved'.format(today,i))
-		    time.sleep(1)
+    elif ch == ord('s'):
+        for i in range(2):
+            cv2.imwrite('./saved_images/usbcam({})_{}.jpg'.format(today,i),frame)
+            print('./saved_images/usbcam({})_{}.jpg saved'.format(today,i))
+            time.sleep(1)
 
 
 cap.release()
